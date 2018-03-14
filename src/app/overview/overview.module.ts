@@ -2,9 +2,9 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 
-import {MDBBootstrapModule} from 'angular-bootstrap-md/index';
 import {OverviewComponent} from './overview.component';
 import {Route} from '../core/route.service';
+import {SharedModule} from '../shared/shared.module';
 
 const routes: Routes = Route.withShell([
   { path: '', redirectTo: '/overview', pathMatch: 'full' },
@@ -14,8 +14,8 @@ const routes: Routes = Route.withShell([
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
-    MDBBootstrapModule
+    SharedModule,
+    RouterModule.forChild(routes)
   ],
   exports: [RouterModule],
   declarations: [

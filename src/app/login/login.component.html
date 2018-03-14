@@ -1,0 +1,26 @@
+<div class="container">
+  <!-- Login form -->
+  <div class="card">
+    <div class="img-container">
+      <img src="assets/logo_black.png" />
+    </div>
+    <div class="form-container">
+      <div class="md-form">
+        <i class="fa fa-user prefix grey-text"></i>
+        <input type="text" id="defaultForm-email" class="form-control" mdbActive>
+        <label for="defaultForm-email">Gebruikersnaam</label>
+      </div>
+
+      <div class="md-form">
+        <i class="fa fa-lock prefix grey-text"></i>
+        <input type="password" id="defaultForm-pass" class="form-control" mdbActive>
+        <label for="defaultForm-pass">Wachtwoord</label>
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-primary btn-block waves-light" mdbRippleRadius (click)="login()">Aanmelden</button>
+      </div>
+    </div>
+  </div>
+  <!-- Login form -->
+</div>

@@ -4,9 +4,6 @@ import { NgModule } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { AppComponent } from './app.component';
-import { OverviewComponent } from './overview/overview.component';
-import { CardComponent } from './card/card.component';
-import { LoginComponent } from './login/login.component';
 import { CoreModule } from './core/core.module';
 import { OverviewModule } from './overview/overview.module';
 import {RouterModule, Routes} from '@angular/router';
@@ -19,7 +16,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    CardComponent
   ],
   imports: [
     BrowserModule,

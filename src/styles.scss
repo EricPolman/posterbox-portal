@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  background: #444;
+  color: white;
+}
+
+// Bootstrap 4 breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+// number of cards per line for each breakpoint
+$cards-per-line: (
+  xs: 1,
+  sm: 2,
+  md: 3,
+  lg: 4,
+  xl: 5
+);
+
+.card-deck {
+  display: grid;
+}
+
+@each $name, $breakpoint in $grid-breakpoints {
+  @media (min-width: $breakpoint) {
+    .card-deck {
+      grid-template-columns: repeat(map-get($cards-per-line, $name), 1fr);
+    }
+  }
+}
+
+@import "../node_modules/angular-bootstrap-md/scss/bootstrap/_functions";
+@import "../node_modules/angular-bootstrap-md/scss/bootstrap/_variables";
+@import "../node_modules/angular-bootstrap-md/scss/bootstrap/_mixins";
+
+.dropdown-item:hover {
+  color: white !important;
+  background-color: $primary !important;
+}

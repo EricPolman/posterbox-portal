@@ -1,6 +1,6 @@
 <!--Card image-->
 <div class="view hm-white-slight waves-light" mdbRippleRadius>
-  <img src="assets/thumb_test.png" class="img-fluid" style="width: 100%;" alt="Card image with a tree in a middle of a lake.">
+  <img src="{{data.thumbnail}}" class="img-fluid" style="width: 100%;" alt="Card image with a tree in a middle of a lake.">
   <a>
     <div class="mask"></div>
   </a>
@@ -9,13 +9,10 @@
 <!--Card content-->
 <div class="card-body">
   <!--Title-->
-  <h4 class="figure-caption">Kattenvoer agenda</h4>
+  <h4 class="figure-caption">{{data.title}}</h4>
   <!--Text-->
 
-  <span class="badge badge-grey">Kattenvoer</span>
-  <span class="badge badge-grey">Woensdag</span>
-  <span class="badge badge-grey">Agenda</span>
-  <span class="badge badge-danger">Evenement</span>
+  <span *ngFor="let tag of data.tags" class="badge badge-{{tag === 'Evenement' ? 'danger' : 'grey'}}">{{tag}}</span>
 </div>
 
 <div class="card-footer text-muted">
@@ -28,9 +25,12 @@
 
     <!--Menu-->
     <div class="dropdown-menu dropdown-primary">
-      <a class="dropdown-item" href="#">PNG (voor social media)</a>
-      <a class="dropdown-item" href="#">PDF (voor print)</a>
-      <a class="dropdown-item" href="#">PSD (voor PhotoShop)</a>
+      <a class="dropdown-item" *ngFor="let file of data.files" href="{{file.path}}" download="{{data.title}}.{{file.type}}">
+        {{file.type | uppercase}}
+        <span *ngIf="file.type === 'png'">(voor social media)</span>
+        <span *ngIf="file.type === 'pdf'">(voor drukwerk)</span>
+        <span *ngIf="file.type === 'psd'">(voor Photoshop)</span>
+      </a>
     </div>
   </div>
 </div>

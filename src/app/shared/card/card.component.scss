@@ -1,3 +1,8 @@
 .badge {
   margin-right: 5px;
+  cursor: pointer;
+}
+
+.badge:hover {
+  opacity: 0.85;
 }

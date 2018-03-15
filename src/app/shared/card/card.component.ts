@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Poster} from '../poster.model';
 import {Lightbox} from 'angular2-lightbox';
+import {Router} from '@angular/router';
 
 @Component({
   selector: '[app-card]',
@@ -12,7 +13,7 @@ export class CardComponent implements OnInit {
 
   private albums: Array<any> = [];
 
-  constructor(private lightBox: Lightbox) {
+  constructor(private lightBox: Lightbox, private router: Router) {
 
   }
 
@@ -23,8 +24,10 @@ export class CardComponent implements OnInit {
 
   open(): void {
     // open lightbox
-    console.log(this.lightBoxConfig);
-
     this.lightBox.open(this.albums, 0);
+  }
+
+  filterOnTag(tag: string) {
+    this.router.navigate([], {queryParams: {tag: tag}});
   }
 }

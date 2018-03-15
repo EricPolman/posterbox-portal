@@ -12,7 +12,7 @@
   <h4 class="figure-caption">{{data.title}}</h4>
   <!--Text-->
 
-  <span *ngFor="let tag of data.tags" class="badge badge-{{tag === 'Evenement' ? 'danger' : 'grey'}}">{{tag}}</span>
+  <span *ngFor="let tag of data.tags" (click)="filterOnTag(tag)" class="badge badge-{{tag === 'Evenement' ? 'danger' : 'grey'}}">{{tag}}</span>
 </div>
 
 <div class="card-footer text-muted">

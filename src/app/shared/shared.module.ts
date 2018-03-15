@@ -3,15 +3,14 @@ import { CommonModule } from '@angular/common';
 import {CardComponent} from './card/card.component';
 import {MDBBootstrapModule} from 'angular-bootstrap-md/index';
 
-
 @NgModule({
   imports: [
     CommonModule,
-    MDBBootstrapModule
+    MDBBootstrapModule,
   ],
   exports: [
     CardComponent,
-    MDBBootstrapModule
+    MDBBootstrapModule,
   ],
   declarations: [
     CardComponent

@@ -9,6 +9,8 @@ import { OverviewModule } from './overview/overview.module';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginModule} from './login/login.module';
 
+import { LightboxModule } from 'angular2-lightbox';
+
 const routes: Routes = [
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
@@ -24,6 +26,7 @@ const routes: Routes = [
     LoginModule,
     OverviewModule,
     MDBBootstrapModule.forRoot(),
+    LightboxModule
   ],
   exports: [RouterModule],
   providers: [],

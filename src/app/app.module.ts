@@ -10,6 +10,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginModule} from './login/login.module';
 
 import { LightboxModule } from 'angular2-lightbox';
+import {PostersService} from './shared/posters.service';
 
 const routes: Routes = [
   { path: '**', redirectTo: '', pathMatch: 'full' }
@@ -29,7 +30,7 @@ const routes: Routes = [
     LightboxModule
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [PostersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

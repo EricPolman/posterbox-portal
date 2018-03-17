@@ -15,8 +15,9 @@
     <!-- Links -->
 
     <!-- Search form -->
-    <form class="form-inline  waves-light" mdbRippleRadius>
-      <input class="form-control mr-sm-2" type="text" placeholder="Zoeken...">
+    <form (keydown.enter)="$event.preventDefault()" class="form-inline  waves-light" mdbRippleRadius>
+      <input class="form-control mr-sm-2" type="text" #searchField (input)="search()" placeholder="Zoeken...">
+      <span [ngClass]="{'hide': searchField.value.length === 0}" class="float-right" type="button" (click)="clearSearch()"><i class="fa fa-times"></i></span>
     </form>
   </links>
   <!-- Collapsible content -->

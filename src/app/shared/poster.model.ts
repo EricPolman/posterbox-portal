@@ -8,4 +8,5 @@ export class Poster {
   tags: [string];
   thumbnail: string;
   files = new Array<PosterFile>();
+  publishedOn: Date;
 }

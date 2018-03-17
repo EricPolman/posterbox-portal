@@ -5,6 +5,7 @@ import { of } from 'rxjs/observable/of';
 export interface Credentials {
   // Customize received credentials here
   username: string;
+  role: string;
   token: string;
 }
 
@@ -41,6 +42,7 @@ export class AuthenticationService {
     // Replace by proper authentication call
     const data = {
       username: context.username,
+      role: 'admin',
       token: '123456'
     };
     this.setCredentials(data, context.remember);

@@ -1,14 +1,13 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {AdminComponent} from './admin.component';
 import {RouterModule, Routes} from '@angular/router';
-
-import {OverviewComponent} from './overview.component';
 import {Route} from '../core/route.service';
 import {SharedModule} from '../shared/shared.module';
+import {AdministratorGuard} from '../core/authentication/administrator.guard';
 
 const routes: Routes = Route.withShell([
-  { path: '', redirectTo: '/overview', pathMatch: 'full' },
-  { path: 'overview', component: OverviewComponent }
+  { path: 'admin', canActivate: [AdministratorGuard], component: AdminComponent }
 ]);
 
 @NgModule({
@@ -19,9 +18,9 @@ const routes: Routes = Route.withShell([
   ],
   exports: [RouterModule],
   declarations: [
-    OverviewComponent
+    AdminComponent
   ],
   providers: [
   ]
 })
-export class OverviewModule { }
+export class AdminModule { }

@@ -7,6 +7,7 @@ import { HeaderComponent } from './shell/header/header.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md/index';
 import {AuthenticationGuard} from './authentication/authentication.guard';
 import {AuthenticationService} from './authentication/authentication.service';
+import {AdministratorGuard} from './authentication/administrator.guard';
 
 @NgModule({
   imports: [
@@ -20,16 +21,8 @@ import {AuthenticationService} from './authentication/authentication.service';
   ],
   providers: [
     AuthenticationService,
-    AuthenticationGuard
+    AuthenticationGuard,
+    AdministratorGuard
   ]
 })
-export class CoreModule {
-
-  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
-    // Import guard
-    if (parentModule) {
-      throw new Error(`${parentModule} has already been loaded. Import Core module in the AppModule only.`);
-    }
-  }
-
-}
+export class CoreModule { }

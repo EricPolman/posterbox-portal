@@ -11,6 +11,7 @@ import {LoginModule} from './login/login.module';
 
 import { LightboxModule } from 'angular2-lightbox';
 import {PostersService} from './shared/posters.service';
+import {AdminModule} from './admin/admin.module';
 
 const routes: Routes = [
   { path: '**', redirectTo: '', pathMatch: 'full' }
@@ -25,6 +26,7 @@ const routes: Routes = [
     CoreModule,
     RouterModule.forRoot(routes),
     LoginModule,
+    AdminModule,
     OverviewModule,
     MDBBootstrapModule.forRoot(),
     LightboxModule

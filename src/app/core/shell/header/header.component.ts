@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild, ViewRef} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {AuthenticationService} from '../../authentication/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -9,10 +10,12 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 export class HeaderComponent implements OnInit {
   @ViewChild('searchField') searchField: ElementRef;
   tag = '';
+  isAdmin = false;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthenticationService) { }
 
   ngOnInit() {
+    this.isAdmin = this.authService.credentials.role === 'admin';
   }
 
   search() {

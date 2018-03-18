@@ -8,11 +8,11 @@
   <links>
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link waves-light" routerLink="/overview" routerLinkActive="active" mdbRippleRadius>Overzicht</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link waves-light" routerLink="/overview" mdbRippleRadius>Overzicht</a>
       </li>
-      <li class="nav-item" *ngIf="isAdmin">
-        <a class="nav-link waves-light" routerLink="/admin" routerLinkActive="active" mdbRippleRadius>Beheer<span class="sr-only"></span></a>
+      <li class="nav-item" routerLinkActive="active" *ngIf="isAdmin">
+        <a class="nav-link waves-light" routerLink="/admin" mdbRippleRadius>Beheer<span class="sr-only"></span></a>
       </li>
     </ul>
     <!-- Links -->

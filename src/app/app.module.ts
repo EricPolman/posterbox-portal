@@ -12,6 +12,9 @@ import {LoginModule} from './login/login.module';
 import { LightboxModule } from 'angular2-lightbox';
 import {PostersService} from './shared/posters.service';
 import {AdminModule} from './admin/admin.module';
+import {environment} from '../environments/environment';
+import {AngularFireModule} from 'angularfire2';
+import {AngularFireAuthModule} from 'angularfire2/auth';
 
 const routes: Routes = [
   { path: '**', redirectTo: '', pathMatch: 'full' }
@@ -28,6 +31,8 @@ const routes: Routes = [
     LoginModule,
     AdminModule,
     OverviewModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     MDBBootstrapModule.forRoot(),
     LightboxModule
   ],

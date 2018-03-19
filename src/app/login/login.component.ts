@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthenticationService} from '../core/authentication/authentication.service';
 import {Router} from '@angular/router';
 
@@ -8,6 +8,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('emailInput') emailInput: ElementRef;
+  @ViewChild('passwordInput') passwordInput: ElementRef;
 
   constructor(private authService: AuthenticationService, private router: Router) { }
 
@@ -17,10 +19,10 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login(
       {
-      username: 'ericpolman',
-      password: 'secret',
-      remember: true}
-    ).subscribe(() => {
+      emailAddress: this.emailInput.nativeElement.value,
+      password: this.passwordInput.nativeElement.value,
+      remember: true }
+    ).then(() => {
       this.router.navigate(['/overview']);
     });
   }

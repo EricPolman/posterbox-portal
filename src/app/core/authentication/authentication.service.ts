@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import {AngularFireAuth} from 'angularfire2/auth';
 
 export interface Credentials {
   // Customize received credentials here
-  username: string;
+  emailAddress: string;
   role: string;
   token: string;
 }
 
 export interface LoginContext {
-  username: string;
+  emailAddress: string;
   password: string;
   remember?: boolean;
 }
@@ -26,7 +27,7 @@ export class AuthenticationService {
 
   private _credentials: Credentials | null;
 
-  constructor() {
+  constructor(private afAuthService: AngularFireAuth) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
       this._credentials = JSON.parse(savedCredentials);
@@ -38,15 +39,13 @@ export class AuthenticationService {
    * @param {LoginContext} context The login parameters.
    * @return {Observable<Credentials>} The user credentials.
    */
-  login(context: LoginContext): Observable<Credentials> {
-    // Replace by proper authentication call
-    const data = {
-      username: context.username,
-      role: 'admin',
-      token: '123456'
-    };
-    this.setCredentials(data, context.remember);
-    return of(data);
+  login(context: LoginContext): Promise<Credentials> {
+    return this.afAuthService.auth.signInWithEmailAndPassword(context.emailAddress, context.password)
+      .then((loginData: any) => {
+        const credentials: Credentials = {emailAddress: loginData.email, role: 'admin', token: ''};
+        this.setCredentials(credentials, context.remember);
+        return credentials;
+    });
   }
 
   /**

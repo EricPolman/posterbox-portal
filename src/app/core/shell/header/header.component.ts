@@ -31,4 +31,9 @@ export class HeaderComponent implements OnInit {
     this.router.navigate([], {queryParams: {tag: this.tag}});
     this.searchField.nativeElement.value = '';
   }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }

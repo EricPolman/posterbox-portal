@@ -15,6 +15,8 @@ import {AdminModule} from './admin/admin.module';
 import {environment} from '../environments/environment';
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireAuthModule} from 'angularfire2/auth';
+import {HttpModule} from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 
 const routes: Routes = [
   { path: '**', redirectTo: '', pathMatch: 'full' }
@@ -27,6 +29,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     CoreModule,
+    HttpClientModule,
     RouterModule.forRoot(routes),
     LoginModule,
     AdminModule,

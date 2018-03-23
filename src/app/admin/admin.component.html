@@ -1,4 +1,12 @@
 <div class="container">
   <h1>Beheer</h1>
+  <div class="card">
+    <div class="card-body">
+      <h3>Selecteer bestanden</h3>
+      <input id="cin" name="cin" type="file" (change)="fileChangeEvent($event)" placeholder="Upload a file..." multiple/>
+      <button type="button" class="btn btn-success btn-s" (click)="upload()">
+        <i class="glyphicon glyphicon-open-file"></i>&nbsp;Upload
+      </button>
+    </div>
+  </div>
 </div>
-

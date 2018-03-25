@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  apiUrl: 'https://api.posterbox.polman.tech',
   firebase: {
     apiKey: 'AIzaSyC56KYcAIW4ORcnlco30IPnfHTR_vG9Ksw',
     authDomain: 'posterbox-90096.firebaseapp.com',

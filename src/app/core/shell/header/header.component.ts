@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthenticationService) { }
 
   ngOnInit() {
-    this.isAdmin = this.authService.credentials.role === 'admin';
+    this.isAdmin = this.authService.credentials.user.role === 'admin';
   }
 
   search() {

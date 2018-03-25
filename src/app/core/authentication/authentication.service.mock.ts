@@ -2,19 +2,27 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
 import { Credentials, LoginContext } from './authentication.service';
+import {User} from '../../shared/user.model';
 
 export class MockAuthenticationService {
 
   credentials: Credentials | null = {
-    emailAddress: 'test',
-    role: 'admin',
+    user: {
+      email: 'test',
+      role: 'admin',
+      name: 'test'
+    },
     token: '123'
+
   };
 
   login(context: LoginContext): Observable<Credentials> {
     return of({
-      emailAddress: context.emailAddress,
-      role: 'admin',
+      user: {
+        email: context.emailAddress,
+        role: 'admin',
+        name: 'test'
+      },
       token: '123456'
     });
   }

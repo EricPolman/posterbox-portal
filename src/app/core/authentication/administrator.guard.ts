@@ -10,7 +10,7 @@ export class AdministratorGuard implements CanActivate {
               private authenticationService: AuthenticationService) { }
 
   canActivate(): boolean {
-    if (this.authenticationService.credentials.role === 'admin') {
+    if (this.authenticationService.credentials.user.role === 'admin') {
       return true;
     }
 

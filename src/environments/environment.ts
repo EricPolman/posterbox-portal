@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
+  apiUrl: 'http://localhost:3000',
   firebase: {
     apiKey: 'AIzaSyC56KYcAIW4ORcnlco30IPnfHTR_vG9Ksw',
     authDomain: 'posterbox-90096.firebaseapp.com',

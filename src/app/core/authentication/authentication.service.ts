@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import {AngularFireAuth} from 'angularfire2/auth';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import {User} from '../../shared/user.model';
+
 
 export interface Credentials {
   // Customize received credentials here
-  emailAddress: string;
-  role: string;
+  user: User;
   token: string;
 }
 
@@ -25,9 +29,10 @@ const credentialsKey = 'credentials';
 @Injectable()
 export class AuthenticationService {
 
+  private _jwtHelper = new JwtHelperService();
   private _credentials: Credentials | null;
 
-  constructor(private afAuthService: AngularFireAuth) {
+  constructor(private afAuthService: AngularFireAuth, private httpClient: HttpClient) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
       this._credentials = JSON.parse(savedCredentials);
@@ -40,11 +45,28 @@ export class AuthenticationService {
    * @return {Observable<Credentials>} The user credentials.
    */
   login(context: LoginContext): Promise<Credentials> {
-    return this.afAuthService.auth.signInWithEmailAndPassword(context.emailAddress, context.password)
-      .then((loginData: any) => {
-        const credentials: Credentials = {emailAddress: loginData.email, role: 'admin', token: ''};
-        this.setCredentials(credentials, context.remember);
-        return credentials;
+    return new Promise<Credentials>((resolve, reject) => {
+      this.httpClient.post(environment.apiUrl + '/login',
+      // {email: context.emailAddress, password: context.password})
+      {email: 'ericpolman900@gmail.com', password: 'secret'})
+      .toPromise()
+        .then(
+          res => { // Success
+            const token = res['token'];
+            const data = this._jwtHelper.decodeToken(token);
+
+            const creds = {
+              token: res['token'],
+              user: data.user
+            };
+            this.setCredentials(creds, context.remember);
+            resolve(creds);
+          }
+        )
+      .catch(error => {
+        console.log(error);
+        reject();
+      });
     });
   }
 

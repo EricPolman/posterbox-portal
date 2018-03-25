@@ -25,7 +25,7 @@
 
     <!--Menu-->
     <div class="dropdown-menu dropdown-primary">
-      <a class="dropdown-item" *ngFor="let file of data.files" href="{{file.path}}" download="{{data.title}}.{{file.type}}">
+      <a class="dropdown-item" *ngFor="let file of data.files" href="{{urlPrefix + file.path}}" download="{{data.title}}.{{file.type}}">
         {{file.type | uppercase}}
         <span *ngIf="file.type === 'png'">(voor social media)</span>
         <span *ngIf="file.type === 'pdf'">(voor drukwerk)</span>

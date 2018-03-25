@@ -16,8 +16,6 @@ export class OverviewComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private postersService: PostersService) { }
 
   ngOnInit() {
-    this.getPosters(this.route.snapshot.queryParams);
-
     this.route.queryParams.subscribe((params: Params) => {
       this.getPosters(params);
     });

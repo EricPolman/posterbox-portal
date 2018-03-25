@@ -14,7 +14,7 @@ export class CardComponent implements OnInit {
 
   private albums: Array<any> = [];
 
-  urlPrefix = environment.apiUrl + '/uploads/';
+  urlPrefix = '/uploads/';
 
   constructor(private lightBox: Lightbox, private router: Router) {
 

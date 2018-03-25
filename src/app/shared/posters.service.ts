@@ -1,36 +1,28 @@
 import {Injectable} from '@angular/core';
 import {AuthenticationService} from '../core/authentication/authentication.service';
-import {Poster} from './poster.model';
+import {Poster, PosterPost} from './poster.model';
+import {environment} from '../../environments/environment';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable()
 export class PostersService {
-  posters: Array<Poster> = [
-    {title: 'Personeel gezocht', thumbnail: 'http://ericpolman.com/files/posterboxtemp/personeelgezocht.png',
-      tags: ['Overig'],
-      files: [
-        {type: 'png', path: 'http://ericpolman.com/files/posterboxtemp/personeelgezocht.png'},
-        {type: 'pdf', path: 'http://ericpolman.com/files/posterboxtemp/personeelgezocht.pdf'}],
-      publishedOn: new Date()},
-    {title: 'It Giet Oan', thumbnail: 'http://ericpolman.com/files/posterboxtemp/poster_gietervrijdag.png',
-      tags: ['Vrijdag', 'Actie', 'Weekdag'],
-      files: [
-        {type: 'png', path: 'http://ericpolman.com/files/posterboxtemp/poster_gietervrijdag.png'}],
-    publishedOn: new Date()},
-    {title: '11e van de 11e', thumbnail: 'http://ericpolman.com/files/posterboxtemp/11vande11.png',
-      tags: ['Carnaval', 'Evenement'],
-      files: [
-        {type: 'png', path: 'http://ericpolman.com/files/posterboxtemp/11vande11.png'}],
-      publishedOn: new Date()},
-    {title: 'TimeWarp', thumbnail: 'http://ericpolman.com/files/posterboxtemp/poster_timewarp.png',
-      tags: ['Zaterdag', 'Actie', 'Weekdag'],
-      files: [
-        {type: 'png', path: 'http://ericpolman.com/files/posterboxtemp/poster_timewarp.png'}],
-      publishedOn: new Date()}
-  ];
+  posters = new Array<Poster>();
 
+  constructor(private authService: AuthenticationService, private httpClient: HttpClient) {
+    const headers = new HttpHeaders({'x-access-token': this.authService.credentials.token});
 
-  constructor(private authService: AuthenticationService) {
-
+    this.httpClient.get(environment.apiUrl + '/posters', {headers: headers}).toPromise()
+      .then((posters: PosterPost[]) => {
+        posters.forEach((poster) => {
+          const p = new Poster();
+          p.title = poster.title;
+          p.customerId = poster.customerId;
+          p.thumbnail = poster.thumbnail;
+          p.tags = JSON.parse(poster.tags);
+          p.files = JSON.parse(poster.files);
+          this.posters.push(p);
+        });
+      });
   }
 
   randomDate(start: Date, end: Date) {

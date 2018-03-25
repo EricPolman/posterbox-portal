@@ -33,6 +33,7 @@ export class OverviewComponent implements OnInit {
       this.search = '';
     }
     this.posters = this.postersService.getPosters(this.tag, this.search);
+    console.log(this.posters);
   }
 
   resetFilter() {

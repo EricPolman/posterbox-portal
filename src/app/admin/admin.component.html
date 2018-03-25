@@ -2,10 +2,37 @@
   <h1>Beheer</h1>
   <div class="card">
     <div class="card-body">
-      <h3>Selecteer bestanden</h3>
-      <input id="cin" name="cin" type="file" (change)="fileChangeEvent($event)" placeholder="Upload a file..." multiple/>
-      <button type="button" class="btn btn-success btn-s" (click)="upload()">
-        <i class="glyphicon glyphicon-open-file"></i>&nbsp;Upload
+      <h3>Poster uploaden</h3>
+
+      <h4>Titel</h4>
+      <input type="text" #titleInput placeholder="Poster titel"/>
+      <hr>
+
+      <h4>Tags</h4>
+      <input type="text" #tagsInput placeholder="Kommagescheiden tags"/>
+      <hr>
+
+      <h4>Klant</h4>
+      <select #customerInput>
+        <option [value]="customer.id" *ngFor="let customer of users">{{ customer.name }}</option>
+      </select>
+      <hr>
+
+      <h4>PNG</h4>
+      <input type="file" (change)="pngFileChangeEvent($event)" placeholder="Upload PNG..."/>
+      <button type="button" class="btn btn-primary btn-s" [disabled]="pngUploaded" (click)="uploadPng()">
+        <i class="glyphicon glyphicon-open-file"></i>&nbsp;Upload PNG
+      </button>
+      <hr>
+
+      <h4>PDF</h4>
+      <input type="file" (change)="pdfFileChangeEvent($event)" placeholder="Upload PDF..."/>
+      <button type="button" class="btn btn-primary btn-s" [disabled]="pdfUploaded" (click)="uploadPdf()">
+        <i class="glyphicon glyphicon-open-file"></i>&nbsp;Upload PDF
+      </button>
+      <hr>
+      <button type="button" class="btn btn-primary btn-s" (click)="publishPoster()">
+        <i class="glyphicon glyphicon-open-file"></i>&nbsp;Publiceer
       </button>
     </div>
   </div>

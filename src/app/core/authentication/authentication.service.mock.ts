@@ -8,6 +8,7 @@ export class MockAuthenticationService {
 
   credentials: Credentials | null = {
     user: {
+      id: 'test',
       email: 'test',
       role: 'admin',
       name: 'test'
@@ -19,6 +20,7 @@ export class MockAuthenticationService {
   login(context: LoginContext): Observable<Credentials> {
     return of({
       user: {
+        id: 'test',
         email: context.emailAddress,
         role: 'admin',
         name: 'test'

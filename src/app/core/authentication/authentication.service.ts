@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import {AngularFireAuth} from 'angularfire2/auth';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -32,7 +31,7 @@ export class AuthenticationService {
   private _jwtHelper = new JwtHelperService();
   private _credentials: Credentials | null;
 
-  constructor(private afAuthService: AngularFireAuth, private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
       this._credentials = JSON.parse(savedCredentials);
@@ -47,8 +46,7 @@ export class AuthenticationService {
   login(context: LoginContext): Promise<Credentials> {
     return new Promise<Credentials>((resolve, reject) => {
       this.httpClient.post(environment.apiUrl + '/login',
-      // {email: context.emailAddress, password: context.password})
-      {email: 'ericpolman900@gmail.com', password: 'secret'})
+      {email: context.emailAddress, password: context.password})
       .toPromise()
         .then(
           res => { // Success

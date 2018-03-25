@@ -1,7 +1,7 @@
 <div class="container">
   <h1 *ngIf="tag.length === 0">Recente posters</h1>
   <h1 *ngIf="tag.length > 0">Resultaten met tag '{{tag}}' <small><a (click)="resetFilter()"><i class="fa fa-times"></i></a></small></h1>
-  <div class="row">
+  <div class="row" *ngIf="posters.length > 0">
     <div class="card-deck col-md-12">
       <div *ngFor="let poster of (tag.length > 0 ? posters : posters.slice(0, 10))" [data]="poster" class="card mb-4" app-card></div>
     </div>

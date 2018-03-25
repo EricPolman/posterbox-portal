@@ -9,7 +9,7 @@ import {PostersService} from '../shared/posters.service';
   styleUrls: ['./overview.component.scss']
 })
 export class OverviewComponent implements OnInit {
-  posters: Array<Poster>;
+  posters: Poster[] = new Array<Poster>();
   tag = '';
   search = '';
 
@@ -32,8 +32,9 @@ export class OverviewComponent implements OnInit {
     } else {
       this.search = '';
     }
-    this.posters = this.postersService.getPosters(this.tag, this.search);
-    console.log(this.posters);
+    this.postersService.getPosters(this.tag, this.search).then((posters) => {
+      this.posters = posters;
+    });
   }
 
   resetFilter() {

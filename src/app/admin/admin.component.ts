@@ -88,7 +88,7 @@ export class AdminComponent implements OnInit {
 
   uploadPdf() {
     const formData: any = new FormData();
-    const file: File = this.pngToUpload[0];
+    const file: File = this.pdfToUpload[0];
 
     formData.append('file', file);
     const headers = new HttpHeaders({'x-access-token': this.authService.credentials.token});

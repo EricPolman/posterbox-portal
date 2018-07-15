@@ -21,6 +21,9 @@ export class AdminComponent implements OnInit {
   pngUploaded = false;
   pdfUploaded = false;
 
+  userCreated = false;
+  posterCreated = false;
+
   users = new Array<User>();
   poster: PosterPost = new PosterPost();
 
@@ -51,7 +54,7 @@ export class AdminComponent implements OnInit {
       email: this.newUserEmailInput.nativeElement.value,
       password: this.newUserPasswordInput.nativeElement.value
     }, {headers: headers})
-      .subscribe(res => { console.log(res); });
+      .subscribe(res => { console.log(res); this.userCreated = true; });
   }
 
   publishPoster() {
@@ -67,7 +70,10 @@ export class AdminComponent implements OnInit {
     const headers = new HttpHeaders({'x-access-token': this.authService.credentials.token});
 
     this.http.post(environment.apiUrl + '/posters', this.poster, {headers: headers})
-      .subscribe(res => { console.log(res); });
+      .subscribe(res => {
+        console.log(res);
+        this.posterCreated = true;
+      });
   }
 
   uploadPng() {
@@ -92,7 +98,7 @@ export class AdminComponent implements OnInit {
 
     formData.append('file', file);
     const headers = new HttpHeaders({'x-access-token': this.authService.credentials.token});
-
+    console.log(file);
     this.http.post(environment.apiUrl + '/files', formData, {headers: headers})
       .subscribe(res => {
         this.files.push({type: 'pdf', path: res['link']});

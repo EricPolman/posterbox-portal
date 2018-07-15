@@ -30,6 +30,10 @@ export class AdminComponent implements OnInit {
   @ViewChild('tagsInput') tagsInput: ElementRef;
   @ViewChild('customerInput') customerInput: ElementRef;
 
+  @ViewChild('newUserNameInput') newUserNameInput: ElementRef;
+  @ViewChild('newUserEmailInput') newUserEmailInput: ElementRef;
+  @ViewChild('newUserPasswordInput') newUserPasswordInput: ElementRef;
+
   constructor(private http: HttpClient, private adminService: AdminService,
               private authService: AuthenticationService) { }
 
@@ -37,6 +41,17 @@ export class AdminComponent implements OnInit {
     this.adminService.getUsers().then((users: Array<User>) => {
       this.users = users;
     });
+  }
+
+  createUser() {
+    const headers = new HttpHeaders({'x-access-token': this.authService.credentials.token});
+
+    this.http.post(environment.apiUrl + '/users', {
+      name: this.newUserNameInput.nativeElement.value,
+      email: this.newUserEmailInput.nativeElement.value,
+      password: this.newUserPasswordInput.nativeElement.value
+    }, {headers: headers})
+      .subscribe(res => { console.log(res); });
   }
 
   publishPoster() {
